@@ -14,7 +14,7 @@ const scrollToBottom = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios.post('http://localhost:5000/add', { content: message })
+    axios.post('https://privatetak.onrender.com/add', { content: message })
       .then(response => {
 
         console.log(response.data);
@@ -28,7 +28,7 @@ const scrollToBottom = () => {
   //HandleDelete
   const handleDelete = (e) => {
 
-    axios.delete('http://localhost:5000/add')
+    axios.delete('https://privatetak.onrender.com/add')
       .then(response => {
 
         console.log(response.data);
@@ -42,7 +42,7 @@ const scrollToBottom = () => {
   };
 
   useEffect(() => {
-    axios.get('http://localhost:5000/add').then((messages) => {
+    axios.get('https://privatetak.onrender.com/add').then((messages) => {
       setMessageData(messages.data)
       console.log(messages.data[0].content);
     })
