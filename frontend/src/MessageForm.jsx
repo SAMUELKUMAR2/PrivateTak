@@ -56,7 +56,7 @@ const scrollToBottom = () => {
   return (
     <div className='w-[100%]' >
 
-      <div className='bg-blue-400 h-[80vh] lg:h-[70vh] overflow-y-scroll'>
+      <div className='bg-blue-400 h-[78vh] lg:h-[70vh] overflow-y-scroll'>
         {messageData.map(message => (
           
             <div ref={messagesEndRef} key={message._id} className='m-2 w-fit p-2 pl-4 border-2 bg-purple-300 rounded-[15px] rounded-bl-none'>
@@ -71,7 +71,7 @@ const scrollToBottom = () => {
       <div className='mt-5  ml-2 mr-2'>
       <form onSubmit={handleSubmit}>
         <input
-        className=' w-[60%] md:w-[50%] lg:w-[50%]  outline-1 p-2 text-wrap rounded-[10px] '
+        className=' w-[45%] md:w-[50%] lg:w-[50%]  outline-1 p-2 text-wrap rounded-[10px] '
           type="text"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
