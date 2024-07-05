@@ -13,7 +13,7 @@ app.use(express.json());
 
 const connection = async ()=>{
   try {
-   const dbConnection = await mongoose.connect(`mongodb+srv://samuel:samuel123@cluster0.1ophkvp.mongodb.net/myDatabase`)
+   const dbConnection = await mongoose.connect(`mongodb+srv://samuel:samuel123@cluster0.1ophkvp.mongodb.net/test`)
     console.log("Connected..............................")
  
   } catch (error) {
@@ -29,6 +29,7 @@ connection()
 // Define a schema and model
 const messageSchema = new mongoose.Schema({
   content: String,
+  time:String,
 });
 
 const Message = mongoose.model('Message', messageSchema);
