@@ -7,14 +7,23 @@ const messagesEndRef = useRef(null);
   const [message, setMessage] = useState('');
   const [messageData, setMessageData] = useState([]);
 
+  
 //Scroll bottom
 const scrollToBottom = () => {
   messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
 };
+
+
+
+// Handle Submit
   const handleSubmit = (e) => {
     e.preventDefault();
+      //update time
+      const now = new Date();
+      const timeString = now.toLocaleTimeString();
 
-    axios.post('https://privatetak.onrender.com/add', { content: message })
+      //post Data
+    axios.post('https://privatetak.onrender.com/add', { content: message , time:timeString})
       .then(response => {
 
         console.log(response.data);
@@ -24,6 +33,22 @@ const scrollToBottom = () => {
         console.error('There was an error!', error);
       });
   };
+
+  //Get 
+  useEffect(() => {
+    axios.get('https://privatetak.onrender.com/add').then((messages) => {
+      setMessageData(messages.data)
+      // console.log(messages.data);
+      
+    
+      
+
+  
+    })
+      .catch(err => console.log(err))
+
+      scrollToBottom();
+  }, [message])
 
   //HandleDelete
   const handleDelete = (e) => {
@@ -41,26 +66,19 @@ const scrollToBottom = () => {
     window.location.reload();
   };
 
-  useEffect(() => {
-    axios.get('https://privatetak.onrender.com/add').then((messages) => {
-      setMessageData(messages.data)
-      console.log(messages.data[0].content);
-    })
-      .catch(err => console.log(err))
-
-      scrollToBottom();
-  }, [message])
 
 
 
   return (
-    <div className='w-[100%]' >
+    <div className='mt-3 md:mt-2 lg:mt-2 w-[100%]' >
 
-      <div className='bg-blue-400 h-[78vh] lg:h-[70vh] overflow-y-scroll'>
+      <div className=' bg-gradient-to-r from-green-500 to-blue-500 h-[86vh]  overflow-y-scroll'>
         {messageData.map(message => (
           
-            <div ref={messagesEndRef} key={message._id} className='m-2 w-fit p-2 pl-4 border-2 bg-purple-300 rounded-[15px] rounded-bl-none'>
+            <div ref={messagesEndRef} key={message._id} className=' m-2 pb-1 w-fit p-2 pl-4 border-2 bg-orange-300 rounded-[15px] rounded-bl-none'>
               {message.content}
+              
+      <p className='text-[9px]  opacity-60 pt-1 '>{message.time}</p>
 
             </div>
             
@@ -68,7 +86,7 @@ const scrollToBottom = () => {
         <div ref={messagesEndRef} />
       </div>
 
-      <div className='mt-5  ml-2 mr-2'>
+      <div className='mt-2  ml-2 mr-2'>
       <form onSubmit={handleSubmit}>
         <input
         className=' w-[45%] md:w-[50%] lg:w-[50%]  outline-1 p-2 text-wrap rounded-[10px] '

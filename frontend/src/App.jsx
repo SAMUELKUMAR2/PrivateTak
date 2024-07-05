@@ -1,20 +1,34 @@
 import { useState } from 'react'
 
 import './App.css'
-import MessageForm from './MessageForm'
+import Message from './Message';
+
 
 function App() {
   
 
-  return (
-    <>
-    <div className='flex flex-col w-[100vw] h-[100vh] items-center justify-center bg-slate-700'>
-      <h3 className=' p-2 font-bold text-white shadow-emerald-300'>Message</h3>
-      <div className="mb-8 w-full lg:w-[90vw] flex items-end ">
-      <MessageForm />
+  const [code,setCode] = useState("")
+
+  const handleSubmit=(e)=>{
+      e.preventDefault();
+
+  }
+ 
+return (
+  <>
+<div className= {`${code=="Nikita" && "hidden"}`}>
+    <div className='h-[100vh] bg-blue-500 flex flex-col gap-4 items-center justify-center   '>
+      <form onSubmit={handleSubmit}>
+      <input
+      value={code}
+      onChange={(e) => setCode(e.target.value)}
+      className='outlin rounded-xl h-8' type="text" />
+      
+      </form>
       </div>
-    </div>
-     </>
+</div>
+{code=="Nikita" && <Message />}
+</>
   )
 }
 
