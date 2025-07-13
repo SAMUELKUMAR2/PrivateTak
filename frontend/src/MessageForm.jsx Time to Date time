@@ -20,8 +20,7 @@ const scrollToBottom = () => {
     e.preventDefault();
       //update time
       const now = new Date();
-      const timeString = now.toLocaleTimeString();
-
+      const timeString = now.toLocaleString();
       //post Data
     axios.post('https://privatetak.onrender.com/add', { content: message , time:timeString})
       .then(response => {
